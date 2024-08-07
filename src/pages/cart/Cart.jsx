@@ -11,7 +11,7 @@ function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart);
+
 
   const getCost = () => {
     let cost = 0;
@@ -28,7 +28,7 @@ function Cart() {
     getCost();
   }, [cart]);
 
-  console.log(totalCost);
+
   return (
     <>
       {cart.length < 1 ? (

@@ -6,10 +6,12 @@ import netbanking from "/netbanking.png";
 import paypal from "/paypal.png";
 import visa from "/visa.png";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 function Payment() {
   const navigate = useNavigate();
-  const [totalCost, settotalCost] = useState();
+  const [totalCost, settotalCost] = useState(
+    JSON.parse(localStorage.getItem("cost"))
+  );
+
   useEffect(() => {
     const cost = localStorage.getItem("cost")
       ? JSON.parse(localStorage.getItem("cost"))
@@ -17,8 +19,7 @@ function Payment() {
     settotalCost(cost);
   }, []);
 
-  console.log(totalCost);
-  
+
   return (
     <div className="w-fulL h-[100%] bg-[#F6F6F6]">
       <section className="container px-32 pt-28">
@@ -82,12 +83,12 @@ function Payment() {
             </div>
             <div className="flex justify-between items-center  w-6/12 mx-auto text-gray-600">
               <p>Delivery</p>
-              <p>$10</p>
+              <p>$1.00</p>
             </div>
             <hr className="my-3" />
             <div className="flex justify-between items-center  w-6/12 mx-auto text-green-400 font-semibold">
               <p>Total</p>
-              <p>${totalCost + 10}</p>
+              <p>${totalCost + 1}</p>
             </div>
           </div>
           <div className="text-center flex gap-10 p-10">

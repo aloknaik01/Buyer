@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart, incCartCount } from "../../features/cartSlice";
 import Spinner from "../../components/spinner/Spinner";
 import Pagination from "../../components/pagination/Pagination";
-import { getObj } from "../../features/getObject";
+
 
 function Home() {
   const [product, setProduct] = useState([]);
@@ -83,7 +83,7 @@ function Home() {
   }, [query]);
 
   const getObjById = (id) => {
-    dispatch(getObj(show?.data?.products?.find((item) => item.id === id)));
+    localStorage.setItem("obj", JSON.stringify(show?.data?.products?.find((item) => item.id === id)));
   };
 
   return (

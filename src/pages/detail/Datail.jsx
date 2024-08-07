@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart, incCartCount } from "../../features/cartSlice";
 import { FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 function Datail() {
-  const { obj } = useSelector((state) => state.obj);
-  const navigate = useNavigate()
-  const dispatch = useDispatch();
-  console.log(obj);
-  const [img, setImg] = useState("");
+  const [obj, setObj] = useState(JSON.parse(localStorage.getItem("obj")));
+
   useEffect(() => {
-    setImg(obj.thumbnail);
+    const objs = JSON.parse(localStorage.getItem("obj"));
+    setObj(objs);
+  }, []);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [img, setImg] = useState(obj?.thumbnail);
+
+  useEffect(() => {
+    setImg(obj?.thumbnail);
   }, []);
 
   return (
-    <section className="w-fll h-screen">
+    <section className="w-fll min-h-screen">
       <div className="contaier mx-auto px-10 pt-28">
         <div className="product-detail flex justify-between items-center">
-          <div className="left w-7/12  h-screen  bg-[#F7F7F7]">
+          <div className="left w-7/12  min-h-screen  bg-[#F7F7F7]">
             <div className="inner-left felx justify-center items-center">
-              <img
-                src={img}
-                alt={obj.title}
-                width={500}
-                height={500}
-                // className="mt-56"
-              />
+              <img src={img} alt={obj.title} width={500} height={500} />
             </div>
           </div>
           <div className="right w-5/6 h-screen px-10">
@@ -92,9 +92,7 @@ function Datail() {
             <div>
               <button
                 className=" my-4 border border-black px-5 py-3 rounded-lg hover:bg-black hover:text-white duration-500"
-                onClick={() => 
-                  navigate('/payment')
-                }
+                onClick={() => navigate("/payment")}
               >
                 Buy Now
               </button>
